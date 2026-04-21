@@ -56,6 +56,8 @@ class ArrayListDictionary : public Dictionary<Key, Val> {
         // return the number of swaps made by the sorting algorithm
         virtual unsigned getNumSwaps() const;
 
+        virtual unsigned getArrayAccess( return list->getArrayAccess(); ) const
+
         // add the record as a key-value pair to the dictionary
         virtual void insert(const Key&, const Val&) override;
 

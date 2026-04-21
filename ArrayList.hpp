@@ -26,7 +26,7 @@ class ArrayList : public List<T> {
         void insertionSort();
 
         // counter to keep track of the number of key comparisons and swaps
-        static unsigned numComps, numSwaps;
+        static unsigned numComps, numSwaps, numArrayAccess;
 
     public:
         // constructor with the maximum size as the argument
@@ -61,6 +61,8 @@ class ArrayList : public List<T> {
 
         // return the number of swaps made by the sorting algorithm
         static unsigned getNumSwaps();
+
+        static unsigned getArrayAccess() { return numArrayAccess; }
 
         // insert the given element (argument 2) at
         // the given position (argument 1)
