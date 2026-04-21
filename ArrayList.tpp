@@ -1,6 +1,22 @@
 template <typename T>
 void ArrayList<T>::bubbleSort() {
     // TODO
+    int lastIndex = this->length-1;
+    // bool swapHappened;
+
+    while (lastIndex > 0) {
+        // swapHappened = false;
+        int lastSwapIndex = 0;
+        for (int j = 0; j < lastIndex; ++j) {
+            if (buffer[j] > buffer[j+1]) {
+                swap(buffer[j], buffer[j+1]);
+                // swapHappened = true;
+                lastSwapIndex = j;
+            }
+        }
+        if (lastSwapIndex == 0) return;
+        lastIndex = lastSwapIndex;
+    }
 }
 
 template <typename T>
