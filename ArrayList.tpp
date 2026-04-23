@@ -22,6 +22,16 @@ void ArrayList<T>::bubbleSort() {
 template <typename T>
 void ArrayList<T>::insertionSort() {
     // TODO
+    for (int i = 1; i < this->length; ++i) {
+        T key = buffer[i];  
+        int j = i - 1;
+        // compare 1- key index to key, 
+
+        for (; j >= 0 && buffer[j] > key; --j) {
+            buffer[j+1] = buffer[j];
+        }
+        buffer[j+1] = key;
+    }
 }
 
 template <typename T>
