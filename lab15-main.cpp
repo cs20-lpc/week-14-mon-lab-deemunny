@@ -88,7 +88,9 @@ int main() {
                     cout << "Number of key comparisons: "
                          << dict.getNumComps() << endl
                          << "Number of swaps: "
-                         << dict.getNumSwaps() << endl;
+                         << dict.getNumSwaps() << endl
+                         << "Number of array accesses: "
+                         << dict.getArrayAccess() << endl;;
                 }
                 catch (const string& e) {
                     cout << e << endl;
