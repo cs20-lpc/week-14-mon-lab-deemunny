@@ -27,8 +27,9 @@ void ArrayList<T>::insertionSort() {
         int j = i - 1;
         // compare 1- key index to key, 
 
-        for (; j >= 0 && buffer[j] > key; --j) {
+        while (j >= 0 && buffer[j] > key) {
             buffer[j+1] = buffer[j];
+            --j;
         }
         buffer[j+1] = key;
     }
