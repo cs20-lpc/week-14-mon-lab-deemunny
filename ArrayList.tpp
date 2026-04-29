@@ -36,17 +36,20 @@ void ArrayList<T>::insertionSort() {
         T key = buffer[i];  
         ++numArrayAccess;
         int j = i - 1;
-        // compare 1- key index to key, 
+        // compare key to index just left of i, 
 
-        // ++numComps;  // initially had this to account for the 1 time the loop runs and does not compare, but realized j>=0 evaluates first, and that's the end con
-        for (; j >= 0 && buffer[j] > key; --j) {
+        while (j >= 0) {
             ++numComps;    
-            numArrayAccess += 4;     // swap() takes 4 array access
-            buffer[j+1] = buffer[j];  // not a swap, just a shift
+            if (buffer[j] > key) {
+                numArrayAccess += 4;     // swap() takes 4 array access
+                buffer[j+1] = buffer[j]; 
+                ++numSwaps;
+                --j;
+            } else break;
         }
         buffer[j+1] = key;   // finally we swap keys
+        // ++numSwaps;
         numArrayAccess += 2;
-        ++numSwaps;
     }
 }
 
