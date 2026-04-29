@@ -1,6 +1,9 @@
 template <typename T>
 void ArrayList<T>::bubbleSort() {
     // TODO
+    numComps = 0;
+    numSwaps = 0;
+    numArrayAccess = 0;
     int lastIndex = this->length-1;
     // bool swapHappened;
 
@@ -8,8 +11,12 @@ void ArrayList<T>::bubbleSort() {
         // swapHappened = false;
         int lastSwapIndex = 0;
         for (int j = 0; j < lastIndex; ++j) {
+            ++numComps;
+            numArrayAccess += 2;
             if (buffer[j] > buffer[j+1]) {
-                swap(buffer[j], buffer[j+1]);
+                ++numSwaps;
+                numArrayAccess += 4;
+                swap(j, j+1);
                 // swapHappened = true;
                 lastSwapIndex = j;
             }
@@ -22,22 +29,49 @@ void ArrayList<T>::bubbleSort() {
 template <typename T>
 void ArrayList<T>::insertionSort() {
     // TODO
+    numComps = 0;
+    numSwaps = 0;
+    numArrayAccess = 0;
     for (int i = 1; i < this->length; ++i) {
         T key = buffer[i];  
+        ++numArrayAccess;
         int j = i - 1;
         // compare 1- key index to key, 
 
-        while (j >= 0 && buffer[j] > key) {
-            buffer[j+1] = buffer[j];
-            --j;
+        // ++numComps;  // initially had this to account for the 1 time the loop runs and does not compare, but realized j>=0 evaluates first, and that's the end con
+        for (; j >= 0 && buffer[j] > key; --j) {
+            ++numComps;    
+            numArrayAccess += 4;     // swap() takes 4 array access
+            buffer[j+1] = buffer[j];  // not a swap, just a shift
         }
-        buffer[j+1] = key;
+        buffer[j+1] = key;   // finally we swap keys
+        numArrayAccess += 2;
+        ++numSwaps;
     }
 }
 
 template <typename T>
 void ArrayList<T>::selectionSort() {
     // TODO
+    // int maxIndex = this->length-1;
+    numComps = 0;
+    numSwaps = 0;
+    numArrayAccess = 0;
+
+    for (int i = 0; i < this->length; ++i) {
+        int minIndex = i;
+        
+        for (int j = i; j < this->length - 1; ++j) {
+            numArrayAccess += 2;
+            ++numComps;
+            if (buffer[minIndex] > buffer[j+1]) minIndex = j + 1;
+        }
+
+        if (minIndex != i) {
+            swap(i,minIndex);
+            ++numSwaps;
+        }
+    }
 }
 
 /*******************************************************************************
@@ -49,6 +83,9 @@ unsigned ArrayList<T>::numComps = 0;
 
 template <typename T>
 unsigned ArrayList<T>::numSwaps = 0;
+
+template <typename T>
+unsigned ArrayList<T>::numArrayAccess = 0;
 
 template <typename T>
 ArrayList<T>::ArrayList(int i)
